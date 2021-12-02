@@ -632,9 +632,19 @@
         <translation>Fuelpad Import Datei muss eine db Datei sein.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="86"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="87"/>
+        <source>Fuelio import file must be a csv file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="94"/>
         <source>Browse...</source>
         <translation type="unfinished">Auswählen...</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="101"/>
+        <source>Import Simulation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

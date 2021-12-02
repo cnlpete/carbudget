@@ -20,6 +20,7 @@ CONFIG(release, debug|release) {
 }
 
 HEADERS += \
+    src/importfuelio.h \
     src/tank.h \
     src/car.h \
     src/station.h \
@@ -36,6 +37,7 @@ HEADERS += \
     src/charttypes.h
 
 SOURCES += CarBudget.cpp \
+    src/importfuelio.cpp \
     src/tank.cpp \
     src/car.cpp \
     src/station.cpp \
@@ -52,6 +54,7 @@ SOURCES += CarBudget.cpp \
     
 DISTFILES += \
     qml/pages/CostEntry.qml \
+    qml/pages/FuelioImport.qml \
     qml/pages/ImportHelp.qml \
     qml/pages/CarEntry.qml \
     qml/pages/CarView.qml \

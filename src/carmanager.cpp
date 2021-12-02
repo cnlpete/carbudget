@@ -20,6 +20,8 @@
 
 
 #include "carmanager.h"
+#include "importfuelio.h"
+
 #include <QSettings>
 #include <QtXml/QDomDocument>
 #include <QFile>
@@ -176,7 +178,7 @@ bool CarManager::createTables(QSqlDatabase db)
     return success;
 }
 
-QString CarManager::importFromCarBudget(QString filename, QString carName)
+QString CarManager::importFromCarBudget(const QString &filename, const QString &carName)
 {
     // Move (rename) the cbg file from home directory to data directory.
     // This does not overwrite existing database file.
@@ -234,7 +236,7 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
     return result;
 }
 
-void CarManager::importFromMyCar(QString filename, QString name)
+void CarManager::importFromMyCar(const QString &filename, const QString &name)
 {
     createCar(name);
     selectCar(name);
@@ -425,16 +427,17 @@ void CarManager::importFromMyCar(QString filename, QString name)
     }
 }
 
-void CarManager::importFromFuelpad(QString filename, QString name)
+void CarManager::importFromFuelpad(const QString &filename, const QString &name)
 {
     qDebug() << "Importing from Fuelpad";
     createCar(name);
     selectCar(name);
-    filename.remove(0,7);
-    qDebug() << "INFO: attempting to process fuelpad DB" << filename;
+    QString dbName = filename;
+    dbName.remove(0,7);
+    qDebug() << "INFO: attempting to process fuelpad DB" << dbName;
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
-    db.setDatabaseName(filename);
+    db.setDatabaseName(dbName);
     if(!db.open())
     {
         qDebug() << "ERROR: fail to open Fuelpad database";
@@ -510,6 +513,26 @@ void CarManager::importFromFuelpad(QString filename, QString name)
     db.close();
     QSqlDatabase::removeDatabase("fuelpaddb");
 }
+
+
+void CarManager::importFromFuelio(const QString& filename, const QString& name) {
+
+    createCar(name);
+    selectCar(name);
+
+    ImportFuelio importer(_car);
+    importer.import(filename);
+
+}
+
+#ifdef QT_DEBUG
+void CarManager::importFromSimulation(const QString &name)
+{
+    createCar(name);
+    selectCar(name);
+    _car->simulation();
+}
+#endif
 
 bool CarManager::is_debug() const
 {

@@ -79,12 +79,28 @@ Page {
                 text: qsTr("Fuelpad import file must be a db file.")
                 font.pixelSize: Theme.fontSizeSmall
             }
+            Text {
+                x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge - Theme.paddingLarge
+                wrapMode: Text.WordWrap
+                color: Theme.primaryColor
+                text: qsTr("Fuelio import file must be a csv file.")
+                font.pixelSize: Theme.fontSizeSmall
+            }
 
             Button {
                id: btnImport
                anchors.horizontalCenter: parent.horizontalCenter
                text: qsTr("Browse...")
                onClicked: pageStack.replace(Qt.resolvedUrl("SelectImportFile.qml"))
+            }
+
+            Button {
+               id: btnImportSimulation
+               anchors.horizontalCenter: parent.horizontalCenter
+               text: qsTr("Import Simulation")
+               onClicked: manager.importFromSimulation("simulation_" + (new Date()).toLocaleDateString("yyyy-MM-dd"))
+               visible: manager.is_debug
             }
         }
     }

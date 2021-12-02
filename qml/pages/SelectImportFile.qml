@@ -43,7 +43,7 @@ Page {
         FolderListModel {
             id: folderModel
             folder: folderName.length > 0 ? folderName : "file://"+downloadPath
-            nameFilters: ["*.xml", "*.db", "*.cbg"]
+            nameFilters: ["*.xml", "*.db", "*.cbg", "*.csv"]
             showDirsFirst: true
             showDotAndDotDot: showFolderUp
         }
@@ -110,7 +110,7 @@ Page {
 
     function importQMLPageName(name)
     {
-        // Checks if a DB, an XML or a CBG file has been chosen and returns appropriate QML page
+        // Checks if a DB, an XML, a CBG, or a CSV file has been chosen and returns appropriate QML page
         if (name.indexOf(".db",name.length-3)!== -1) {
             return "FuelpadImport.qml"
         }
@@ -119,6 +119,9 @@ Page {
         }
         if (name.indexOf(".cbg",name.length-4)!== -1) {
             return "CarBudgetImport.qml"
+        }
+        if (name.indexOf(".csv",name.length-4)!== -1) {
+            return "FuelioImport.qml"
         }
         // We really should implement some error handling here...
         return ""
